@@ -9,7 +9,8 @@ from .models import Suan
 def suan():
     relation = int(request.get_json().get('relation'))
     direction = int(request.get_json().get('direction'))
-    suan_list = [s for s in Suan.query.filter_by(direction=direction).filter_by(relation=relation).all()]
+    sex = int(request.get_json().get('sex'))
+    suan_list = [s for s in Suan.query.filter_by(sex=sex).filter_by(direction=direction).filter_by(relation=relation).all()]
     result = ""
     me=""
     if suan_list != []:
@@ -24,9 +25,10 @@ def add():
     if request.method == 'POST':
         relation = request.form.get('relation')
         direction = request.form.get('direction')
+        sex = request.form.get('sex')
         result = request.form.get('result')
         me = request.form.get('me')
-        suan1 = Suan(relation=relation,result=result,direction=direction,me=me)
+        suan1 = Suan(relation=relation,direction=direction,sex=sex,result=result,me=me)
         db.session.add(suan1)
         db.session.commit()
     return render_template('add.html')
@@ -36,9 +38,11 @@ def show():
     suans=[s for s in Suan.query.all()]
     all_suan = [{
         "id":i.id,
+        "direction":i.direction,
+        "sex":i.sex,
         "relation":i.relation,
         "result":i.result,
-        "me":i.me
+        "me":i.me,
     } for i in suans]
     return jsonify({
         "all_suan":all_suan

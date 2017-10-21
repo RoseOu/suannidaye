@@ -11,6 +11,7 @@ from . import db
 
 class Suan(db.Model):
     id=db.Column(db.Integer, primary_key=True)
+    sex=db.Column(db.Integer)
     direction=db.Column(db.Integer)
     relation=db.Column(db.Integer)
     result=db.Column(db.String(164))

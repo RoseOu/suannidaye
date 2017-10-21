@@ -16,3 +16,4 @@ SQLAlchemy==1.1.14
 Werkzeug==0.12.2
 gunicorn
 uWSGI==2.0.14
+wsgiref==0.1.2

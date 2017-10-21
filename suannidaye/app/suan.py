@@ -25,7 +25,7 @@ def suan():
                 me=u"看你大爷"
                 status=1
                 break
-            elif (list_rela[i] in [0,2,4,6]) and list_rela[i+1]==8:
+            elif ((list_rela[i] in [0,2,4,6]) and list_rela[i+1]==8) or ((list_rela[i] in [1,3,5,7]) and list_rela[i+1]==9):
                 result=u"看你大爷"
                 me=u"看你大爷"
                 status=3

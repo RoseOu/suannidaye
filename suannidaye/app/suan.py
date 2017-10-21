@@ -38,7 +38,7 @@ def suan():
     if status in [0,2]:
         suan_list = [s for s in Suan.query.filter_by(sex=sex).filter_by(direction=direction).filter_by(relation=relation).all()]
         if suan_list != []:
-            suan = random.choice(suan_list)
+            suan = Suan.query.filter_by(sex=sex).filter_by(direction=direction).filter_by(relation=relation).first()
             result=suan.result,
             me=suan.me
         else:

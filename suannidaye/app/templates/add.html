@@ -5,12 +5,27 @@
 </head>
 <body>
 	<form action="" method="post">
-	Suan:<br>
-	<input type="text" name="suan">
+	输入你要算的亲戚关系 :<br>
+	0：父 | 1：母 | 2：哥 | 3：姐 | 4：弟 | 5：妹 | 6：子 | 7：女 | 8：夫 | 9：妻 <br>
+	如：父亲的哥哥的儿子输入：026 <br>
+	<input type="text" name="relation">
 	<br>
-	Result:<br>
+	<br>
+	输入南北方 :<br>
+	0：南方 | 1：北方 <br>
+	<input type="text" name="direction">	
+	<br>
+	<br>
+	称呼:<br>
+	直接输入字符串<br>
 	<input type="text" name="result">
-	<br><br>
+	<br>
+	<br>
+	对方对自己的称呼:<br>
+	直接输入字符串<br>
+	<input type="text" name="me">
+	<br>
+	<br>
 	<input type="submit" value="Submit">
 	</form> 
 </body>

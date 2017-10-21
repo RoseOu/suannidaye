@@ -7,37 +7,42 @@ from .models import Suan
 
 @app.route('/suan/',methods=["GET","POST"])
 def suan():
-    suan = int(request.get_json().get('suan'))
+    relation = int(request.get_json().get('relation'))
     direction = int(request.get_json().get('direction'))
-    result_list = [s for s in Suan.query.filter_by(suan=suan).all()]
-    result=""
-    if result_list != []:
-        result = random.choice(result_list)
+    suan_list = [s for s in Suan.query.filter_by(direction=direction).filter_by(relation=relation).all()]
+    result = ""
+    me=""
+    if suan_list != []:
+        suan = random.choice(suan_list)
     return jsonify({
-        "result":result
+        "result":suan.result,
+        "me":suan.me
         })
 
 @app.route('/add/', methods=["GET","POST"])
 def add():
     if request.method == 'POST':
-        suan=request.form.get('suan')
-        result=request.form.get('result')
-        suan1=Suan(suan=suan,result=result)
+        relation = request.form.get('relation')
+        direction = request.form.get('direction')
+        result = request.form.get('result')
+        me = request.form.get('me')
+        suan1 = Suan(relation=relation,result=result,direction=direction,me=me)
         db.session.add(suan1)
         db.session.commit()
     return render_template('add.html')
 
 @app.route('/show/', methods=["GET"])
 def show():
-    results=[r for r in Suan.query.all()]
+    suans=[s for s in Suan.query.all()]
     all_suan = [{
         "id":i.id,
-        "suan":i.suan,
-        "result":i.result
-        } for i in results]
+        "relation":i.relation,
+        "result":i.result,
+        "me":i.me
+    } for i in suans]
     return jsonify({
         "all_suan":all_suan
-        })
+    })
 
 @app.route('/delete/', methods=["GET","POST"])
 def delete():
@@ -47,3 +52,4 @@ def delete():
         db.session.delete(suan)
         db.session.commit()
     return render_template('delete.html')
+

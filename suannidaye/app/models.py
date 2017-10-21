@@ -13,7 +13,7 @@ class Suan(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     sex=db.Column(db.Integer)
     direction=db.Column(db.Integer)
-    relation=db.Column(db.Integer)
+    relation=db.Column(db.String(64))
     result=db.Column(db.String(164))
     me=db.Column(db.String(164))
 

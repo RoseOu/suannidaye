@@ -41,21 +41,28 @@ def suan():
             suan = random.choice(suan_list)
             result=suan.result,
             me=suan.me
+        else:
+            result=u"看你大爷"
+            me=u"看你大爷"
+            status=4
     return jsonify({
         "result":result,
-        "me":me
+        "me":me,
+        "status":status
         })
 
 @app.route('/add/', methods=["GET","POST"])
 def add():
     if request.method == 'POST':
         relation = request.form.get('relation')
-        direction = request.form.get('direction')
+#        direction = request.form.get('direction')
         sex = request.form.get('sex')
         result = request.form.get('result')
         me = request.form.get('me')
-        suan1 = Suan(relation=relation,direction=direction,sex=sex,result=result,me=me)
+        suan1 = Suan(relation=relation,direction=0,sex=sex,result=result,me=me)
+        suan2 = Suan(relation=relation,direction=1,sex=sex,result=result,me=me)
         db.session.add(suan1)
+        db.session.add(suan2)
         db.session.commit()
     return render_template('add.html')
 

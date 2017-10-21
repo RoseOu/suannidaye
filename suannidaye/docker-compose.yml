@@ -1,0 +1,10 @@
+# suannidaye app
+suannidaye:
+    build: .
+    container_name: suannidaye
+    env_file:
+        - suannidaye.env
+    command: gunicorn --name guisheng -b 0.0.0.0:8686 -w 2 wsgi:app
+    ports:
+        - "8686:8686"
+
